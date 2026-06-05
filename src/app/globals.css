@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Utility untuk menyembunyikan scrollbar pada horizontal carousel (Tailwind v4 tidak menyediakannya bawaan) */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE & Edge lama */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
