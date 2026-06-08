@@ -6,7 +6,7 @@
 import type { Product, ProductDetail, ProductReview } from '@/types/product'
 import { dummyProducts } from '@/lib/data/dummy-products'
 
-const PLACEHOLDER_IMAGE = '/images/product-placeholder.svg'
+const PLACEHOLDER_IMAGE = '/images/product-placeholder.png'
 
 // === Galeri Foto ===
 

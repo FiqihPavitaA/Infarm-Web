@@ -5,7 +5,7 @@
 import type { Product } from '@/types/product'
 
 // Placeholder image yang dipakai semua produk sementara (TODO: ganti foto produk asli)
-const PLACEHOLDER_IMAGE = '/images/product-placeholder.svg'
+const PLACEHOLDER_IMAGE = '/images/product-placeholder.png'
 
 // 10 produk dummy meniru katalog terlaris pada desain
 // TODO: ganti dengan query Supabase setelah OMS selesai
