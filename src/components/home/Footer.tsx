@@ -21,10 +21,10 @@ const SITEMAP = [
 
 // Ikon sosial media (inline SVG brand — tanpa aset/library, mengikuti warna teks via currentColor)
 const SOCIAL = [
-  { label: 'Instagram', Icon: InstagramIcon, href: '#' },
-  { label: 'TikTok', Icon: TiktokIcon, href: '#' },
-  { label: 'Facebook', Icon: FacebookIcon, href: '#' },
-  { label: 'YouTube', Icon: YoutubeIcon, href: '#' },
+  { label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/infarm.id/' },
+  { label: 'TikTok', Icon: TiktokIcon, href: 'https://www.tiktok.com/@infarmid' },
+  { label: 'Facebook', Icon: FacebookIcon, href: '' }, // sementara kosong: tidak ada aksi saat diklik
+  { label: 'YouTube', Icon: YoutubeIcon, href: 'https://youtube.com/@infarmid' },
 ]
 
 // Menampilkan footer homepage dengan achievement, sertifikasi, sitemap, dan sosial media.
@@ -84,13 +84,26 @@ export default function Footer() {
             <ul className="mt-4 flex gap-3">
               {SOCIAL.map((s) => (
                 <li key={s.label}>
-                  <Link
-                    href={s.href}
-                    aria-label={s.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 transition hover:bg-white/25"
-                  >
-                    <s.Icon />
-                  </Link>
+                  {s.href ? (
+                    // Punya URL → link eksternal (buka tab baru)
+                    <Link
+                      href={s.href}
+                      aria-label={s.label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 transition hover:bg-white/25"
+                    >
+                      <s.Icon />
+                    </Link>
+                  ) : (
+                    // Belum ada URL → elemen statis, tidak ada aksi saat diklik
+                    <span
+                      aria-label={s.label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15"
+                    >
+                      <s.Icon />
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

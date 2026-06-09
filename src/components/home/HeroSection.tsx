@@ -45,37 +45,45 @@ export default function HeroSection() {
       <div aria-hidden className="absolute inset-0 -z-10 bg-black/10" />
 
       {/* === Konten hero === */}
-      {/* pt besar memberi ruang untuk AppBar fixed; konten dibatasi max-w-6xl agar rapi di layar lebar */}
-      <div className="mx-auto w-full max-w-6xl flex-1 px-4 pt-20 pb-12 sm:px-6 sm:pt-24 lg:px-8">
-        {/* Floating search input */}
-        <div className="flex max-w-xl items-center gap-2 rounded-full border border-white/60 bg-white/70 px-5 py-3 shadow-md backdrop-blur-sm">
-          <input
-            type="text"
-            placeholder="Media tanam"
-            aria-label="Cari produk"
-            className="w-full bg-transparent text-base text-zinc-700 placeholder:text-zinc-500 focus:outline-none"
-          />
-          <SearchIcon className="shrink-0 text-zinc-600" />
+      {/* flex-col + justify-between membagi ruang vertikal: grup atas (search+judul), CTA di tengah,
+          dan kartu statistik menempel di bawah. Dengan 3 grup, jarak antar grup sama → CTA persis
+          di tengah antara judul dan kartu. Berlaku di semua ukuran layar.
+          pt besar memberi ruang untuk AppBar fixed. */}
+      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-between px-4 pt-20 pb-12 sm:px-6 sm:pt-24 lg:px-8">
+        {/* Grup atas: search + headline */}
+        <div>
+          {/* Floating search input */}
+          <div className="flex max-w-xl items-center gap-2 rounded-full border border-white/60 bg-white/70 px-5 py-3 shadow-md backdrop-blur-sm">
+            <input
+              type="text"
+              placeholder="Media tanam"
+              aria-label="Cari produk"
+              className="w-full bg-transparent text-base text-zinc-700 placeholder:text-zinc-500 focus:outline-none"
+            />
+            <SearchIcon className="shrink-0 text-zinc-600" />
+          </div>
+
+          {/* Marketing headline — putih, dengan drop-shadow agar tetap terbaca di atas background */}
+          <h1 className="mt-8 max-w-2xl font-sans text-4xl font-extrabold leading-tight tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl">
+            Berkebun Jadi Mudah
+            <br />
+            Pasti Panen
+          </h1>
         </div>
 
-        {/* Marketing headline — putih, dengan drop-shadow agar tetap terbaca di atas background */}
-        <h1 className="mt-8 max-w-2xl font-sans text-4xl font-extrabold leading-tight tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl">
-          Berkebun Jadi Mudah
-          <br />
-          Pasti Panen
-        </h1>
+        {/* CTA utama (di tengah) — wrapper agar tombol tetap selebar kontennya & rata kiri */}
+        <div>
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-7 py-3 text-base font-bold text-white shadow-md transition hover:brightness-90 active:scale-[0.98]"
+          >
+            Belanja Sekarang
+            <ArrowRightIcon />
+          </Link>
+        </div>
 
-        {/* CTA utama — kapsul lonjong menuju katalog semua produk (/products, tanpa filter) */}
-        <Link
-          href="/products"
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-primary px-7 py-3 text-base font-bold text-white shadow-md transition hover:brightness-90 active:scale-[0.98]"
-        >
-          Belanja Sekarang
-          <ArrowRightIcon />
-        </Link>
-
-        {/* Trust badges — vertikal di mobile, sejajar di layar lebih besar */}
-        <ul className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        {/* Trust badges (di bawah) — grid 3 kolom sejajar sejak mobile, selaras lebar dengan search */}
+        <ul className="grid max-w-xl grid-cols-3 gap-2 sm:gap-3">
           <TrustBadge highlight="3,4 Juta +" label="Pembeli Puas" />
           <TrustBadge highlight="4.9" label="Rating Produk" />
           <TrustBadge highlight="100%" label="Produk Original" />
@@ -87,12 +95,13 @@ export default function HeroSection() {
 
 // === Sub-komponen ===
 
-// Satu kotak trust badge semi-transparan dengan angka highlight (hijau) dan label di bawahnya
+// Satu kotak trust badge frosted-glass dengan angka highlight (abu gelap) dan label kompak di bawahnya
 function TrustBadge({ highlight, label }: { highlight: string; label: string }) {
   return (
-    <li className="rounded-xl bg-white/60 px-4 py-2 text-center shadow-sm backdrop-blur-sm sm:min-w-[150px]">
-      <p className="text-2xl font-extrabold text-brand-primary">{highlight}</p>
-      <p className="text-sm font-medium text-zinc-800">{label}</p>
+    <li className="rounded-2xl bg-white/80 px-2 py-3 text-center shadow-sm backdrop-blur-md">
+      <p className="text-base font-bold text-gray-800 sm:text-xl">{highlight}</p>
+      {/* whitespace-nowrap: jaga label tetap satu baris di HP mini */}
+      <p className="whitespace-nowrap text-[10px] text-gray-600 sm:text-xs">{label}</p>
     </li>
   )
 }
