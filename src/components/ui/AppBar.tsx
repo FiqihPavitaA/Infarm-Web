@@ -44,7 +44,7 @@ export default function AppBar() {
           </button>
           {/* Ikon keranjang + badge jumlah reaktif (client component) */}
           <CartIconLink />
-          <Link href="/akun" aria-label="Akun" className="p-1">
+          <Link href="/track" aria-label="Lacak Pesanan" className="p-1">
             <ProfileIcon />
           </Link>
         </nav>
